@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Available Pets
+{% endblock %}
+
+{% block content %}
+    <h1>Available Pets for Adoption</h1>
+    <ul>
+        {% for pet in pets %}
+            <li>
+                <h3>{{ pet.name }}</h3>
+                {% if pet.photo_url %}
+                    <img src="{{ pet.photo_url }}" alt="Photo of {{ pet.name }}" style="width:150px; height:150px;">
+                {% endif %}
+                {% if pet.available %}
+                    <strong>Available for adoption</strong>
+                {% else %}
+                    <strong>Not available</strong>
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
