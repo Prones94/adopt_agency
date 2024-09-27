@@ -10,8 +10,8 @@
         {% for pet in pets %}
             <li>
                 <h3>{{ pet.name }}</h3>
-                {% if pet.photo_url %}
-                    <img src="{{ pet.photo_url }}" alt="Photo of {{ pet.name }}" style="width:150px; height:150px;">
+                {% if pet.photo %}
+                    <img src="{{ pet.photo }}" alt="Photo of {{ pet.name }}" style="width:150px; height:150px;">
                 {% endif %}
                 {% if pet.available %}
                     <strong>Available for adoption</strong>
@@ -21,4 +21,5 @@
             </li>
         {% endfor %}
     </ul>
+    <a href="/add">Add a Pet</a>
 {% endblock %}

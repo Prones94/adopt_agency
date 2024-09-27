@@ -1,6 +1,6 @@
 from optparse import Option
 from flask_wtf import FlaskForm
-from wtforms import StringField, TextAreaField, IntegerField
+from wtforms import StringField, TextAreaField, IntegerField, BooleanField
 from wtforms.validators import InputRequired, Optional, URL, NumberRange, AnyOf
 
 class AddPetForm(FlaskForm):
@@ -10,3 +10,10 @@ class AddPetForm(FlaskForm):
   photo = StringField("Photo URL", validators=[Optional(),URL()])
   age = IntegerField("Age of Pet", validators=[Optional(), NumberRange(min=0,max=30,message="Age of pet must be between 0 and 30")])
   notes = StringField("Pet Details", validators=[Optional()])
+  available = BooleanField("Available")
+
+class EditPetForm(FlaskForm):
+  """Form for editing pet details"""
+  photo = StringField("Photo", validators=[Optional(), URL()])
+  notes = StringField("Pet Details", validators=[Optional()])
+  available = BooleanField("Available")
