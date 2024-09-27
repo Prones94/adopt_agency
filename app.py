@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, request
+from flask import Flask, render_template, redirect, request, flash
 
 from forms import AddPetForm, EditPetForm
 from models import db,connect_db, Pet
@@ -40,6 +40,7 @@ def show_add_form():
     db.session.add(new_pet)
     db.session.commit()
 
+    flash(f"Added {new_pet.name}!", "success")
     return redirect('/')
   else:
     return render_template('add_pet.html',form=form)
@@ -56,6 +57,7 @@ def show_edit_pet_form(pet_id):
     pet.available = form.available.data
 
     db.session.commit()
+    flash(f"Updated {pet.name}!")
     return redirect('/')
   else:
     return render_template('pet_detail.html', form=form, pet=pet)
