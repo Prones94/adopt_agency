@@ -4,18 +4,8 @@
 {% block content %}
   <h1 class="mt-4">Add New Pet</h1>
   <form method="POST" class="form-group">
-    {{ form.hidden_tag}}
-    {% for field in form if field.widget.input_type != hidden %}
-      <div class="form-group">
-        {{field.label(class="form-label")}}
-        {{field(class="form-control")}}
-
-        {% for err in field.errors %}
-        <div class="text-danger">{{err}}</div>
-        {% endfor %}
-      </div>
-    {% endfor %}
-    <button class="btn btn-primary mt-3">Submit</button>
+    {% include '_pet_form_fields.html' %}
+    <button class="btn btn-primary mt-3">Add Pet</button>
   </form>
   <br>
   <a href="/" class="btn btn-secondary">Back to Home</a>
