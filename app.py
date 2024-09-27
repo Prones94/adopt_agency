@@ -1,5 +1,4 @@
-from flask import Flask, request, render_template, redirect, flash, session
-from flask_debugtoolbar import DebugToolbarExtension
+from flask import Flask, render_template, redirect, request
 
 from forms import AddPetForm, EditPetForm
 from models import db,connect_db, Pet
@@ -8,21 +7,20 @@ from models import db,connect_db, Pet
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///adopt_db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SECRET_KEY'] = 'your-secret-key'
-app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
+app.config['SECRET_KEY'] = 'adoptapet1'
 
 # Initialize the database
 connect_db(app)
 db.create_all()
 
-# Initialize debug toolbar
-toolbar = DebugToolbarExtension(app)
 
 @app.route('/')
 def home_page():
-  """Home Page lists pets name, photo, and availability"""
-  pets = Pet.query.all()
-  return render_template("homepage.html", pets=pets)
+  """Home Page listing available and not available pets"""
+  # Query for available and unavailable pets
+  available_pets = Pet.query.filter_by(available=True).all()
+  unavailable_pets = Pet.query.filter_by(available=False).all()
+  return render_template("homepage.html", available_pets=available_pets, unavailable_pets=unavailable_pets)
 
 @app.route('/add', methods=["GET", "POST"])
 def show_add_form():
@@ -61,3 +59,7 @@ def show_edit_pet_form(pet_id):
     return redirect('/')
   else:
     return render_template('pet_detail.html', form=form, pet=pet)
+
+
+if __name__ == '__main__':
+  app.run(debug=True)
