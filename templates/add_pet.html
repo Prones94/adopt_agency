@@ -2,23 +2,23 @@
 {% block title %}Add New Pet{% endblock %}
 
 {% block content %}
-  <h1>Add New Pet</h1>
-  <form method="POST">
+  <h1 class="mt-4">Add New Pet</h1>
+  <form method="POST" class="form-group">
     {{ form.hidden_tag}}
     {% for field in form if field.widget.input_type != hidden %}
-      <p>
-        {{field.label}}
-        {{field}}
+      <div class="form-group">
+        {{field.label(class="form-label")}}
+        {{field(class="form-control")}}
 
         {% for err in field.errors %}
-        <span>{{err}}</span>
+        <div class="text-danger">{{err}}</div>
         {% endfor %}
-      </p>
+      </div>
     {% endfor %}
-    <button>Submit</button>
+    <button class="btn btn-primary mt-3">Submit</button>
   </form>
   <br>
-  <a href="/">Back to Home</a>
+  <a href="/" class="btn btn-secondary">Back to Home</a>
 
 {% endblock %}
 

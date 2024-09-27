@@ -1,42 +1,42 @@
-{% extends "base.html" %} {% block title %} Available and Unavailable Pets {%
-endblock %} {% block content %}
-<h1>Available Pets for Adoption</h1>
-<ul>
-	{% for pet in available_pets %}
-	<li>
-		<h3>{{ pet.name }}</h3>
-		{% if pet.photo %}
-		<img
-			src="{{ pet.photo }}"
-			alt="Photo of {{ pet.name }}"
-			style="width: 150px; height: 150px"
-		/>
-		{% endif %} {% if pet.available %}
-		<strong>Available for adoption</strong>
-		{% else %}
-		<strong>Not available at the moment</strong>
-		{% endif %}
-	</li>
-	{% endfor %}
-</ul>
-<hr />
-<h1>Unavailable Pets</h1>
-<ul>
-	{% for pet in unavailable_pets %}
-	<li>
-		<h3>{{pet.name}}</h3>
-		{% if pet.photo %}
-		<img
-			src="{{ pet.photo }}"
-			alt="Photo of {{ pet.name }}"
-			style="width: 150px; height: 150px"
-		/>
-		{% endif %}
-		<strong>No longer available for adoption</strong>
-	</li>
-	{% else %}
-	<p>All pets are currently available for adoption</p>
-	{% endfor %}
-</ul>
-<a href="/add">Add a Pet</a>
+{% extends 'base.html' %}
+{% block title %}
+  Available and Unavailable Pets
+{% endblock %}
+{% block content %}
+  <div class="row">
+    <div class="col-md-6">
+      <h1>Available Pets for Adoption</h1>
+      <ul class="list-group">
+        {% for pet in available_pets %}
+          <li class="list-group-item">
+            <h3>{{ pet.name }}</h3>
+            {% if pet.photo %}
+              <img class="img-thumbnail" src="{{ pet.photo }}" alt="Photo of {{ pet.name }}" style="width: 150px; height: 150px" />
+            {% endif %} {% if pet.available %}
+              <strong>Available for adoption</strong>
+            {% else %}
+              <p>Not available at the moment</p>
+            {% endif %}
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+    <div class="col-md-6">
+      <h1>Unavailable Pets</h1>
+      <ul class="list-group">
+        {% for pet in unavailable_pets %}
+          <li class="list-group-item">
+            <h3>{{ pet.name }}</h3>
+            {% if pet.photo %}
+              <img class="img-thumbnail" src="{{ pet.photo }}" alt="Photo of {{ pet.name }}" style="width: 150px; height: 150px" />
+            {% endif %}
+            <strong>No longer available for adoption</strong>
+          </li>
+        {% else %}
+          <p>All pets are currently available for adoption</p>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+  <a href="/add">Add a Pet</a>
 {% endblock %}

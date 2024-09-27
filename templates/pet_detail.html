@@ -3,32 +3,34 @@
 {% block title %}{{pet.name}} - Details{% endblock %}
 
 {% block content %}
+<div class="mt-4">
   <h1>{{pet.name}} Details</h1>
   <p><strong>Species:</strong> {{pet.species}}</p>
 
   {% if pet.age %}
-    <p></strong>Age:</strong> {{pet.age}}</p>
+  <p></strong>Age:</strong> {{pet.age}}</p>
   {% endif %}
 
   {% if pet.photo %}
-    <p><strong>Photo:</strong></p>
-    <img src="{{pet.photo}}" alt="Photo of {{pet.name}}" style="width:150px; height:150p">
+  <p><strong>Photo:</strong></p>
+  <img class="img-thumbnail" src="{{pet.photo}}" alt="Photo of {{pet.name}}" style="width:150px; height:150p">
   {% endif %}
+</div>
 
-  <h2>Edit Pet</h2>
-  <form method="POST">
+  <h2 class="mt-4">Edit Pet</h2>
+  <form method="POST" class="form-group">
     {{form.hidden_tag()}}
     {% for field in form if field.widget.input_type != hidden %}
-      <p>
-        {{ field.label }}
-        {{field}}
+      <div class="form-group">
+        {{ field.label(class="form-label") }}
+        {{field(class="form-control")}}
         {% for err in field.errors %}
-          <span>{{err}}</span>
+          <div class="text-danger">{{err}}</div>
         {% endfor %}
-      </p>
+      </div>
     {% endfor %}
-    <button>
+    <button class="btn btn-primary mt-3">Update Pet</button>
   </form>
   <br>
-  <a href="/">Back to Home</a>
+  <a href="/" class="btn btn-secondary">Back to Home</a>
 {% endblock %}
